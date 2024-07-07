@@ -19,11 +19,7 @@ const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json({ limit: "5mb" }));
-app.use(cors({
-    origin: '*', // Adjust according to your needs
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser());
