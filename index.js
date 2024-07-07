@@ -6,8 +6,6 @@ import { connectMongodb } from "./db/conectMongodb.js";
 import cors from "cors";
 import { v2 as cloudinary } from 'cloudinary';
 
-
-
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -21,7 +19,11 @@ const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json({ limit: "5mb" }));
-app.use(cors());
+app.use(cors({
+    origin: '*', // Adjust according to your needs
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser());
