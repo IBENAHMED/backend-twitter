@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import { authRoutes, userRoutes, postRoutes, notificationRoutes } from './routers/index.js';
 import { connectMongodb } from "./db/conectMongodb.js";
 import cookieParser from "cookie-parser";
-import cors from 'cors';
+import cors from "cors";
 import { v2 as cloudinary } from 'cloudinary';
 
 
