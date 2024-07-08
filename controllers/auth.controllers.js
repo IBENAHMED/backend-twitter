@@ -37,13 +37,15 @@ export const sigup = async (req, res) => {
             password: passwordHash,
         });
 
+        await newUser.save();
+
         if (newUser) {
 
-            const token = jwt.sign({ id: newUser }, process.env.JWT_SECRET);
-
+            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
             return res.status(201).json({ token });
+
         } else {
-            return res.status(201).json({
+            return res.status(400).json({
                 message: "Invalid user data"
             });
         }

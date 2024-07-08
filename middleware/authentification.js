@@ -19,7 +19,9 @@ export let authentification = async (req, res, next) => {
             });
         };
 
+
         let user = await User.findById({ _id: decode.id }).select("-password");
+
         if (!user) {
             return res.status(400).json({
                 error: "user not found"
