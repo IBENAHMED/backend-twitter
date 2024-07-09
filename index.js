@@ -21,6 +21,18 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json({ limit: "5mb" }));
 app.use(cors());
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', "GET,OPTIONS,PATCH,DELETE,POST,PUT");
+    res.header('Access-Control-Allow-Headers', "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version");
+    res.header('Access-Control-Allow-Credentials', 'true');
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    };
+    next();
+});
+
 app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser());
 
