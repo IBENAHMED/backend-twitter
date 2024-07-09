@@ -1,15 +1,14 @@
 {
-    "version": 2,
-    "builds": [
+    "outputDirectory": "build",
+    "rewrites": [
         {
-            "src": "./index.js",
-            "use": "@vercel/node"
+            "source": "/(.)",
+            "destination": "/index.js"
         }
     ],
-    "routes": [
+    "headers": [
         {
-            "src": "/(.)",
-            "dest": "/",
+            "source": "/(.)",
             "headers": [
                 {
                     "key": "Access-Control-Allow-Credentials",
@@ -17,7 +16,7 @@
                 },
                 {
                     "key": "Access-Control-Allow-Origin",
-                    "value": ""
+                    "value": "*"
                 },
                 {
                     "key": "Access-Control-Allow-Methods",
