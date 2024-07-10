@@ -9,28 +9,28 @@ export const sigup = async (req, res) => {
         let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
         if (!emailRegex.test(email)) {
-            return res.status(400).json({
-                error: "Invalid email format"
+            return res.json({
+                message: "Invalid email format"
             });
         };
 
         let existingUserName = await User.findOne({ username });
         if (existingUserName) {
-            return res.status(400).json({
-                error: "this username already exists"
+            return res.json({
+                message: "this username already exists"
             });
         };
-        
+
         let existingUserEmail = await User.findOne({ email });
         if (existingUserEmail) {
-            return res.status(400).json({
-                error: "this email already exists"
+            return res.json({
+                message: "this email already exists"
             });
         };
 
         if (password.length < 6) {
-            return res.status(400).json({
-                error: "the password must be at the least 6 characters"
+            return res.json({
+                message: "the password must be at the least 6 characters"
             });
         };
 
