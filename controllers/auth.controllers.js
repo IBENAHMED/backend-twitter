@@ -65,36 +65,27 @@ export const sigup = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
 
-        // Find user by email
-        const user = await User.findOne({ email });
+        let { email, password } = req.body;
+        let user = await User.findOne({ email });
+        let isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
-        // If user not found, return error
-        // if (!user) {
-        //     return res.status(401).json({ error: "Invalid email or password" });
-        // }
+        if (!isPasswordCorrect || !user) {
+            return res.json({
+                error: "Invalid email or password"
+            });
+        };
 
-        // Compare passwords
-        // const isPasswordCorrect = await bcrypt.compare(password, user.password || "");
-
-        // If password incorrect, return error
-        // if (!isPasswordCorrect) {
-        //     return res.status(401).json({ error: "Invalid email or password" });
-        // }
-
-        // Generate JWT token
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
-        // Return token
-        return res.status(200).json({ token });
+        return res.status(200).json({ token })
 
     } catch (err) {
-        console.error("Error in login function:", err);
-        return res.status(500).json({ error: "Server Error" });
-    }
+        res.status(500).json({
+            error: "Invalid Server Error"
+        });
+    };
 };
-
 
 export const getMe = async (req, res) => {
     try {
