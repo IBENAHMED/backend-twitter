@@ -15,11 +15,19 @@ cloudinary.config({
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-// var corsOptions = ;
+const options = [
+    cors({
+        origin: '*',
+        methods: '*',
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true,
+    })
+];
+
 
 // Middleware
 app.use(express.json({ limit: "5mb" }));
-app.use(cors());
+app.use(options);
 
 app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser());
