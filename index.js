@@ -5,7 +5,6 @@ import { authRoutes, userRoutes, postRoutes, notificationRoutes } from './router
 import { connectMongodb } from "./db/conectMongodb.js";
 import cors from "cors";
 import { v2 as cloudinary } from 'cloudinary';
-import mongoose from "mongoose";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -21,12 +20,6 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json({ limit: "5mb" }));
 app.use(cors());
 
-// Database connection
-mongoose.connect(`${process.env.MONGO_URI}`).then(() => {
-    console.log("Database connected");
-}).catch((err) => {
-    console.error("Database connection error:", err);
-});
 
 app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser());
