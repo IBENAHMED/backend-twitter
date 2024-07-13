@@ -64,28 +64,8 @@ export const sigup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    // try {
-
     let { email, password } = req.body;
     let user = await User.findOne({ email });
-    // let isPasswordCorrect = await bcrypt.compare(password, user.password);
-
-    //     if (!isPasswordCorrect || !user) {
-    //         return res.json({
-    //             error: "Invalid email or password"
-    //         });
-    //     };
-
-    // const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-
-    //     return res.status(200).json({ token })
-
-    // } catch (err) {
-    //     res.status(500).json({
-    //         error: "Invalid Server Error"
-    //     });
-    // };
-    // console.log()
     return res.status(200).json({ user })
 };
 
