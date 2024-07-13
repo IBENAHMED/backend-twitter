@@ -64,9 +64,51 @@ export const sigup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    let { email, password } = req.body;
-    let user = await User.findOne({ email });
-    return res.status(200).json({ user })
+    // try {
+
+    //     let { email, password } = req.body;
+    //     let user = await User.findOne({ email });
+    //     let isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+
+    //     if (!isPasswordCorrect || !user) {
+    //         return res.json({
+    //             error: "Invalid email or password"
+    //         });
+    //     };
+
+    //     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+    //     return res.status(200).json({ token })
+
+    // } catch (err) {
+    //     res.status(500).json({
+    //         error: "Invalid Server Error"
+    //     });
+    // };
+    const { email, password } = req.body;
+    if (email && password) {
+        try {
+            const user = await User.findOne({ email });
+            if (!user) {
+                return res.status(400).json({ error: "Invalid login" });
+            }
+
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+
+            if (!isPasswordValid) {
+                return res.status(400).json({ error: "Invalid login" });
+            }
+
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            return res.status(200).json({ token })
+
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: "Failed to login user" });
+        }
+    } else {
+        res.status(400).json({ error: "Missing required fields" });
+    }
 };
 
 export const getMe = async (req, res) => {
