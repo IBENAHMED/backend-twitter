@@ -66,9 +66,9 @@ export const sigup = async (req, res) => {
 export const login = async (req, res) => {
     // try {
 
-    //     let { email, password } = req.body;
-    //     let user = await User.findOne({ email });
-    //     let isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+    let { email, password } = req.body;
+    let user = await User.findOne({ email });
+    // let isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     //     if (!isPasswordCorrect || !user) {
     //         return res.json({
@@ -76,7 +76,7 @@ export const login = async (req, res) => {
     //         });
     //     };
 
-    //     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
     //     return res.status(200).json({ token })
 
@@ -85,7 +85,7 @@ export const login = async (req, res) => {
     //         error: "Invalid Server Error"
     //     });
     // };
-    return res.status(200).json({ token: "rrrrrrrrrrrrrrrrrrrr" })
+    return res.status(200).json({ token })
 };
 
 export const getMe = async (req, res) => {
