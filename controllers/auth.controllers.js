@@ -76,7 +76,7 @@ export const login = async (req, res) => {
     //         });
     //     };
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    // const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
     //     return res.status(200).json({ token })
 
@@ -85,7 +85,8 @@ export const login = async (req, res) => {
     //         error: "Invalid Server Error"
     //     });
     // };
-    return res.status(200).json({ token })
+    // console.log()
+    return res.status(200).json({ user })
 };
 
 export const getMe = async (req, res) => {
