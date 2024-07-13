@@ -85,30 +85,7 @@ export const login = async (req, res) => {
     //         error: "Invalid Server Error"
     //     });
     // };
-    const { email, password } = req.body;
-    if (email && password) {
-        try {
-            const user = await User.findOne({ email });
-            if (!user) {
-                return res.status(400).json({ error: "Invalid login" });
-            }
-
-            const isPasswordValid = await bcrypt.compare(password, user.password);
-
-            if (!isPasswordValid) {
-                return res.status(400).json({ error: "Invalid login" });
-            }
-
-            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-            return res.status(200).json({ token })
-
-        } catch (err) {
-            console.error(err);
-            res.status(500).json({ error: "Failed to login user" });
-        }
-    } else {
-        res.status(400).json({ error: "Missing required fields" });
-    }
+    return res.status(200).json({ token: "rrrrrrrrrrrrrrrrrrrr" })
 };
 
 export const getMe = async (req, res) => {
