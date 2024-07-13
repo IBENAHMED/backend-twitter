@@ -5,6 +5,7 @@ import { authRoutes, userRoutes, postRoutes, notificationRoutes } from './router
 import { connectMongodb } from "./db/conectMongodb.js";
 import cors from "cors";
 import { v2 as cloudinary } from 'cloudinary';
+import mongoose from "mongoose";
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
