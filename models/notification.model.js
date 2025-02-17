@@ -1,26 +1,29 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
-let NotificationShema = mongoose.Schema({
+let NotificationShema = mongoose.Schema(
+  {
     from: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        require: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      require: true,
     },
     to: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        require: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      require: true,
     },
     type: {
-        type: String,
-        require: true,
-        enum: ['like', 'follow']
+      type: String,
+      require: true,
+      enum: ["like", "follow"],
     },
     read: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
-}, { timestamps: true })
+  },
+  {timestamps: true},
+)
 
-let Notification = mongoose.model("Notification", NotificationShema);
-export default Notification;
+let Notification = mongoose.model("Notification", NotificationShema)
+export default Notification

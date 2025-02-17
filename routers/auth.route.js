@@ -1,13 +1,11 @@
-import express from "express";
-import { login, sigup, getMe } from "../controllers/auth.controllers.js";
-import { authentification } from "../middleware/authentification.js";
+import express from "express"
+import {login, sigup, getMe} from "../controllers/auth.controllers.js"
+import {authentification} from "../middleware/authentification.js"
 
-let router = express.Router();
+let router = express.Router()
 
-router.get('/me', authentification, getMe);
-router.post('/sigup', sigup);
-router.post('/login', login);
-// router.post('/logout', authentification, logout);
+router.get("/me", authentification, getMe)
+router.post("/sigup", sigup)
+router.post("/login", login)
 
-export default router;
-// module.exports = router;
+export default router
